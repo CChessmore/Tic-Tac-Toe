@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.js"></script>
+</head>
+<body>
+  <div id="container">
+<table id='board'>
+  <tr id='boardTop'>
+    <td id='button1' class='boardTop'>H</td>
+    <td id='button2'class='boardTop'>H</td>
+    <td id='button3'class='boardTop'>H</td>
+  </tr>
+  <tr id=>
+      <td id='button4'class='boardMid'>H</td>
+      <td id='button5'class='boardMid'>H</td>
+      <td id='button6'class='boardMid'>H</td>
+  </tr>
+  <tr id='boardBot'>
+    <td id='button7'class='boardBot'>H</td>
+    <td id='button8'class='boardBot'>H</td>
+    <td id='button9'class='boardBot'>H</td>
+  </tr>
+</table>
+</div>
+<h3>Tic Tac Toe</h3>
+<p>First turn is always X!</p>
+
+<script>
+$(function()
+{
+  turnTrack = 1;
+  function play(buttonNum) {
+    buttonName = '#button' + buttonNum;
+    if(turnTrack % 2 != 0) {
+      $(buttonName).html('X');
+      $(buttonName).css('color','red');
+    }
+    else {
+      $(buttonName).html('O');
+      $(buttonName).css('color','blue');
+    }
+    turnTrack++;
+    $(buttonName).attr('disabled','disabled');
+  }
+
+  function winCheck(numIn) {
+    buttonName = '#button'+numIn;
+    //Use number of last button pressed to make win checks more efficient
+    //E.g. if button 2 is pressed, it can only be a vertical or diagonal win
+    //However, button 5 (middle one) can be any of these.
+
+    //Vertical checks first
+  if (numIn == 1 || numIn == 4 || numIn == 7)
+  {
+    if($('#button1').text() == 'X' && $('#button4').text() == 'X' && $('#button7').text() == 'X')
+    {
+    alert('X wins!');
+    }
+    if ($('#button1').text() == 'O' && $('#button4').text() == 'O' && $('#button7').text() == 'O')
+    {
+    alert('O wins!')
+    }}
+  if (numIn == 2 || numIn == 5 || numIn == 8)
+  {
+    if ($('#button2').text() == 'X' && $('#button5').text() == 'X' && $('#button8').text() == 'X')
+    {
+    alert('X wins!')
+    }
+    if ($('#button2').text() == 'O' && $('#button5').text() == 'O' && $('#button8').text() == 'O')
+    {
+    alert('O wins!');
+    }}
+  if (numIn == 3 || numIn == 6 || numIn == 9)
+  {
+    if ($('#button3').text() == 'X' && $('#button6').text() == 'X' && $('#button9').text() == 'X')
+    {
+      alert('X wins!')
+    }
+    if ($('#button3').text() == 'O' && $('#button6').text() == 'O' && $('#button9').text() == 'O')
+    {
+      alert('O wins!')
+    }
+  }
+  //Horizontal checks
+  if (numIn == 1 || numIn == 2 || numIn == 3)
+  {
+    if($('#button1').text() == 'X' && $('#button2').text() == 'X' && $('#button3').text() == 'X')
+    {
+      alert('X wins!');
+    }
+    if($('#button1').text() == 'O' && $('#button2').text() == 'O' && $('#button3').text() == 'O')
+    {
+      alert('O wins!');
+    }
+  }
+  if(numIn == 4 || numIn == 5 || numIn == 6)
+  {
+    if($('#button4').text() == 'X' && $('#button5').text() == 'X' && $('#button6').text() == 'X')
+    {
+      alert('X wins!');
+    }
+    if($('#button4').text() == 'O' && $('#button5').text() == 'O' && $('#button6').text() == 'O')
+    {
+      alert('O wins!');
+    }
+    }
+  if(numIn == 7 || numIn == 8 || numIn == 9)
+    {
+    if($('#button7').text() == 'X' && $('#button8').text() == 'X' && $('#button9').text() == 'X')
+    {
+      alert('X wins!');
+    }
+    if($('#button7').text() == 'O' && $('#button8').text() == 'O' && $('#button9').text() == 'O')
+    {
+      alert('O wins!');
+    }
+    }
+  //Diagonal checks
+  if (numIn == 1 || numIn == 3 || numIn == 5 || numIn == 7 || numIn == 9)
+  {
+      if($('#button1').text() == 'X' && $('#button5').text() == 'X' && $('#button9').text() == 'X'
+          || $('#button3').text() == 'X' && $('#button5').text() == 'X' && $('#button7').text() == 'X')
+      {
+        alert('X wins!');
+      }
+      if($('#button1').text() == 'O' && $('#button5').text() == 'O' && $('#button9').text() == 'O'
+          || $('#button3').text() == 'O' && $('#button5').text() == 'O' && $('#button7').text() == 'O')
+      {
+        alert('O wins!');
+      }
+  }
+  }
+
+  document.getElementsByTagName('body')[0].style.textAlign = "center";
+  document.getElementsByTagName('body')[0].style.backgroundColor = "gray";
+  document.getElementById('container').style.margin = "auto";
+  document.getElementById('board').style.margin = "auto";
+  $('td').css("padding", "4rem");
+  $('td').css("font-size", "45px");
+  $('td').css("text-align","center");
+  $('td').css("color","gray");
+  $('td').css('border-collapse','seperate');
+  $('td').css('border','3.5px solid black');
+  $('.boardTop').css('border-top','none');
+  $('.boardMid').css('border-left','none');
+  $('.boardMid').css('border-right','none');
+  $('.boardBot').css('border-bottom','none');
+  $('#button1').css('border-left','none');
+  $('#button5').css('border-left','3.5px solid black');
+  $('#button5').css('border-right','3.5px solid black');
+  $('#button5').css('border-bottom','3.5px solid black');
+  $('#button5').css('border-top','3.5px solid black');
+  $('#button6').css('border-left','3.5px solid black');
+  $('#button4').css('border-right','3.5px solid black');
+  $('#button7').css('border-left','none');
+  $('#button9').css('border-right','none');
+  $('#button3').css('border-right','none');
+
+  $('#button1').click(function()
+  {
+    play(1);
+    winCheck(1);
+  });
+  $('#button2').click(function()
+  {
+    play(2);
+    winCheck(2);
+  });
+  $('#button3').click(function()
+  {
+    play(3);
+    winCheck(3);
+  });
+  $('#button4').click(function()
+  {
+    play(4);
+    winCheck(4);
+  });
+  $('#button5').click(function()
+  {
+    play(5);
+    winCheck(5);
+  });
+  $('#button6').click(function()
+  {
+    play(6);
+    winCheck(6);
+  });
+  $('#button7').click(function()
+  {
+    play(7);
+    winCheck(7);
+  });
+  $('#button8').click(function()
+  {
+    play(8);
+    winCheck(8);
+  });
+  $('#button9').click(function()
+  {
+    play(9);
+    winCheck(9);
+  });
+
+
+});
+
+</script>
+</body>
+</html>
